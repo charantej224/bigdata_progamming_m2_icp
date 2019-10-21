@@ -7,6 +7,9 @@ object MergeSort {
     val sc = new SparkContext(conf)
 
     def mergeSort(xs: List[Int]): List[Int] = {
+      println("Merge sort iteration")
+      xs.foreach(print)
+
       val n = xs.length / 2
       if (n == 0) xs
       else {
