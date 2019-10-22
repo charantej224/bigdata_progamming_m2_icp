@@ -1,8 +1,8 @@
 import org.apache.spark.{SparkConf, SparkContext}
 
-object BreadthFirst {
+object GraphTraversal {
   def main(args: Array[String]) {
-    val conf = new SparkConf().setAppName("breadthfirstsearch").setMaster("local[*]")
+    val conf = new SparkConf().setAppName("Graph Traversals").setMaster("local[*]")
     val sc = new SparkContext(conf)
     type Vertex = Int
     type Graph = Map[Vertex, List[Vertex]]
@@ -18,7 +18,6 @@ object BreadthFirst {
         else
           breadthFirst(newNeighbors, newNeighbors :: visited)
       }
-
       breadthFirst(List(start), List(List(start))).reverse
     }
 
@@ -28,7 +27,7 @@ object BreadthFirst {
         if (visited.contains(v))
           visited
         else {
-          val neighbours: List[Vertex] = g(v) filterNot visited.contains
+          val neighbours: List[Vertex] = g(v).filterNot(visited.contains)
           neighbours.foldLeft(v :: visited)((b, a) => depthFirst(a, b))
         }
       }
@@ -38,8 +37,10 @@ object BreadthFirst {
 
     val bfsresult = BFS(1, g)
     val dfsresult = DFS(1, g)
-    println(bfsresult.mkString(","))
-    println(dfsresult.mkString(","))
+    println("breadth first")
+    bfsresult.flatten.foreach(print(_, "\t"))
+    println("\ndepth first")
+    dfsresult.foreach(print(_, "\t"))
 
   }
 
