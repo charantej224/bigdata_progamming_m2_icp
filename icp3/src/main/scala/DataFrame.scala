@@ -22,15 +22,15 @@ object DataFrame {
     val unionDf = df1.union(df2)
     unionDf.orderBy("Country").show()
 
-    dataframe.groupBy(col("treatment"),col("Country")).avg("Age").show()
+    dataframe.groupBy(col("treatment"), col("Country")).avg("Age").show()
 
-    val joined_df = df1.join(df2, col("df1.Country") === col("df2.Country"), "inner")
-    joined_df.show()
+    val joinedDataFrame = df1.join(df2, df1.col("Country").equalTo(df2.col("Country")), "inner")
+    joinedDataFrame.show()
 
     dataframe.groupBy("Country").mean("Age").show()
     sparkSession.sql("SELECT max(`Age`) FROM survey").show()
     sparkSession.sql("SELECT min(`Age`) FROM survey").show()
     sparkSession.sql("SELECT avg(`Age`) FROM survey").show()
-    println(dataframe.take(13))
+    println(dataframe.take(13).last)
   }
 }
