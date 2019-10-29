@@ -24,7 +24,6 @@ object DataFrame {
     df1.createOrReplaceTempView("df1")
     df2.createOrReplaceTempView("df2")
 
-
     val unionDf = df1.union(df2)
     unionDf.orderBy("Country").show()
 
