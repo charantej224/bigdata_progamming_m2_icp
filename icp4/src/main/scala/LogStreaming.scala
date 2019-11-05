@@ -4,7 +4,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 object LogStreaming {
 
   def main(args: Array[String]): Unit = {
-    val conf = new SparkConf().setMaster("local[2]").setAppName("NetworkWordCount")
+    val conf = new SparkConf().setMaster("local[2]").setAppName("log_file_Streaming")
     val ssc = new StreamingContext(conf, Seconds(10))
     val lines = ssc.textFileStream("/log")
     val words = lines.flatMap(_.split(" "))
