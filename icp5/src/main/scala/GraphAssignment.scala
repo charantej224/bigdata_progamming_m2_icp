@@ -25,6 +25,9 @@ object GraphAssignment {
       .option("mode", "DROPMALFORMED")
       .load("DataSets/201508_station_data.csv")
 
+    // Alternatives is drop duplicates using dataframe, but hanlding it from the others.
+    // tripsDataFrame.dropDuplicates()
+
     // Printing the Schema
     tripsDataFrame.printSchema()
     stationDataFrame.printSchema()
@@ -85,28 +88,6 @@ object GraphAssignment {
 
     // 11.Apply the motif findings.
     val motifs = stationGraph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[ca]->(a)").show(5, false)
-
-    //bonus1
-    stationGraph.degrees.show(5, false)
-
-    //bonus2
-    stationGraph.edges
-      .groupBy("src", "dst").count()
-      .orderBy(desc("count"))
-      .show(10)
-
-    //bonus3
-    val degreeRatio = inDeg.join(outDeg, inDeg.col("id") === outDeg.col("id"))
-      .drop(outDeg.col("id"))
-      .selectExpr("id", "double(inDegree)/double(outDegree) as degreeRatio")
-    degreeRatio.cache()
-
-    degreeRatio.orderBy(desc("degreeRatio")).limit(10).show(5, false)
-
-    //bonus4
-    stationGraph.vertices.write.parquet("vertices")
-    stationGraph.edges.write.parquet("edges")
-
 
   }
 }
