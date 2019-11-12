@@ -9,7 +9,6 @@ object GraphAssignment {
   def main(args: Array[String]): Unit = {
 
     val conf = new SparkConf().setAppName("Graph_M2_ICP5").setMaster("local[2]")
-    val sparkContext = new SparkContext(conf)
     val sparkSession = SparkSession.builder().appName("Graph_M2_ICP5").config(conf = conf).getOrCreate()
 
     //1. Import the dataset as a csv file and create data frames directly on import than create graph out of the data frame created.
@@ -38,13 +37,13 @@ object GraphAssignment {
     // 3.Remove duplicates
     // 6.Create vertices
     // 7.Show some vertices
-    val stationVertices = stationDataFrame
+    val vertices = stationDataFrame
       .withColumnRenamed("name", "id")
       .distinct()
 
     // 4.Name Columns
     // 8. Show some edges
-    val tripEdges = tripsDataFrame
+    val edges = tripsDataFrame
       .withColumnRenamed("Start Station", "src")
       .withColumnRenamed("End Station", "dst")
       .withColumnRenamed("Trip ID", "tripid")
@@ -59,10 +58,10 @@ object GraphAssignment {
       .withColumnRenamed("Zip Code", "ZipCode")
 
     //5.Output DataFrame
-    tripEdges.show(10)
+    edges.show(10)
 
     //Creating the graphframe
-    val directedGraph = GraphFrame(stationVertices, tripEdges)
+    val directedGraph = GraphFrame(vertices, edges)
     directedGraph.cache()
 
     directedGraph.edges
@@ -88,6 +87,16 @@ object GraphAssignment {
 
     // 11.Apply the motif findings.
     val motifs = directedGraph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[ca]->(a)").show(5, false)
+
+    //Bonus 1
+    directedGraph.degrees.show(10)
+
+    //bonus2 : group by source destination, then order by the count (which makes it popular)
+    // and then order by count. desc i.e. most to rare.
+    directedGraph.edges
+      .groupBy("src", "dst").count()
+      .orderBy(desc("count"))
+      .show(10)
 
   }
 }
