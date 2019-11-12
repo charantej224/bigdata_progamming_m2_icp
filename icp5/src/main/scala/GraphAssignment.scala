@@ -62,16 +62,16 @@ object GraphAssignment {
     tripEdges.show(10)
 
     //Creating the graphframe
-    val stationGraph = GraphFrame(stationVertices, tripEdges)
-    stationGraph.cache()
+    val directedGraph = GraphFrame(stationVertices, tripEdges)
+    directedGraph.cache()
 
-    stationGraph.edges
+    directedGraph.edges
       .groupBy("src", "dst").count()
       .orderBy(desc("count"))
       .show(10)
 
 
-    stationGraph.edges
+    directedGraph.edges
       .where("src = 'Townsend at 7th' OR dst = 'Townsend at 7th'")
       .groupBy("src", "dst").count()
       .orderBy(desc("count"))
@@ -80,14 +80,14 @@ object GraphAssignment {
 
 
     // 9.Vertex in-Degree
-    val inDeg = stationGraph.inDegrees
+    val inDeg = directedGraph.inDegrees
     inDeg.orderBy(desc("inDegree")).show(5, false)
     // 10.Vertex out-Degree
-    val outDeg = stationGraph.outDegrees
+    val outDeg = directedGraph.outDegrees
     outDeg.orderBy(desc("outDegree")).show(5, false)
 
     // 11.Apply the motif findings.
-    val motifs = stationGraph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[ca]->(a)").show(5, false)
+    val motifs = directedGraph.find("(a)-[ab]->(b); (b)-[bc]->(c); (c)-[ca]->(a)").show(5, false)
 
   }
 }

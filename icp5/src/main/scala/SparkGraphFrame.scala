@@ -38,5 +38,9 @@ object SparkGraphFrame {
 
     g.inDegrees.orderBy(desc("id")).show()
     g.outDegrees.orderBy(desc("id")).show()
+    val filteredEdges = g.filterEdges("relationship = 'follow'")
+    println(filteredEdges.edges.count())
+    filteredEdges.find("(v1)-[v1v2]->(v2);(v2)-[v2v3]->(v3);!(v3)-[]->(v1)").show()
+
   }
 }
