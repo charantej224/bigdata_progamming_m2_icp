@@ -57,8 +57,13 @@ object GraphAssignment {
       .withColumnRenamed("Subscriber Type", "SubscriberType")
       .withColumnRenamed("Zip Code", "ZipCode")
 
-    //5.Output DataFrame
+    vertices.printSchema()
+    vertices.show(10)
+
+    edges.printSchema()
     edges.show(10)
+
+    //5.Output DataFrame
 
     //Creating the graphframe
     val directedGraph = GraphFrame(vertices, edges)
@@ -97,6 +102,18 @@ object GraphAssignment {
       .groupBy("src", "dst").count()
       .orderBy(desc("count"))
       .show(10)
+
+    //bonus3
+    val degreeRatio = inDeg.join(outDeg, inDeg.col("id") === outDeg.col("id"))
+      .drop(outDeg.col("id"))
+      .selectExpr("id", "double(inDegree)/double(outDegree) as degreeRatio")
+    degreeRatio.cache()
+
+    degreeRatio.orderBy(desc("degreeRatio")).limit(10).show(5, false)
+
+    //bonus4
+    directedGraph.vertices.write.parquet("vertices")
+    directedGraph.edges.write.parquet("edges")
 
   }
 }
