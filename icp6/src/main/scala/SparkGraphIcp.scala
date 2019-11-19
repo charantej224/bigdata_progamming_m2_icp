@@ -20,7 +20,7 @@ object SparkGraphIcp {
       .option("header", "true") //reading the headers
       .option("mode", "DROPMALFORMED")
       .load("Datasets/201508_station_data.csv")
-    
+
 
     val vertices = stationDataFrame
       .withColumnRenamed("name", "id")
@@ -77,7 +77,6 @@ object SparkGraphIcp {
     // BFS
     val pathBFS = directedGraph.bfs.fromExpr("id = 'Japantown'").toExpr("dockcount < 15").run()
     pathBFS.show()
-    println("BFS ")
 
   }
 
