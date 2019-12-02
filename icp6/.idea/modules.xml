@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/icp6.iml" filepath="$PROJECT_DIR$/.idea/modules/icp6.iml" />
+      <module fileurl="file://$PROJECT_DIR$/icp6.iml" filepath="$PROJECT_DIR$/icp6.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/icp6-build.iml" filepath="$PROJECT_DIR$/.idea/modules/icp6-build.iml" />
     </modules>
   </component>
