@@ -2,17 +2,16 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import col, when
 from pyspark.ml.classification import LogisticRegression
 from pyspark.ml.feature import VectorAssembler
-import os
 
 # Create spark session
 spark = SparkSession.builder.appName("ICP 7").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
-
 # Load data and select feature and label columns
-data = spark.read.format("csv").option("header", True).option("inferSchema", True).option("delimiter", ",").load("/home/charan/workspaces/big_data_programming/bigdata_progamming_m2_icp/icp7/apps/datasets/imports-85.data")
-data = data.withColumn("label", when(col("num-of-doors") == "four", 1).otherwise(0)).select("label", "length", "width", "height")
-
+data = spark.read.format("csv").option("header", True).option("inferSchema", True).option("delimiter", ",").load(
+    "/home/charan/workspaces/big_data_programming/bigdata_progamming_m2_icp/icp7/apps/datasets/imports-85.data")
+data = data.withColumn("label", when(col("num-of-doors") == "four", 1).otherwise(0)).select("label", "length", "width",
+                                                                                            "height")
 
 # Create vector assembler for feature columns
 assembler = VectorAssembler(inputCols=data.columns[1:], outputCol="features")

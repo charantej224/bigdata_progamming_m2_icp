@@ -1,8 +1,6 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
 from pyspark.ml.regression import LinearRegression
 from pyspark.ml.feature import VectorAssembler
-import os
 # Create spark session
 spark = SparkSession.builder.appName("ICP 14").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")

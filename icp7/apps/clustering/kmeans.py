@@ -1,8 +1,6 @@
 from pyspark.sql import SparkSession
-from pyspark.sql.functions import col
 from pyspark.ml.clustering import KMeans
 from pyspark.ml.feature import VectorAssembler
-import os
 
 # Create spark session
 spark = SparkSession.builder.appName("ICP 14").getOrCreate()
