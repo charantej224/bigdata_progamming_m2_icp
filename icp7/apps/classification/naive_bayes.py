@@ -3,7 +3,6 @@ from pyspark.ml.classification import NaiveBayes
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import MulticlassMetrics
-from pyspark.sql.functions import col
 
 # Create spark session
 spark = SparkSession.builder.appName("Lab 4").getOrCreate()

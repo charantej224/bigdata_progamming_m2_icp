@@ -3,7 +3,6 @@ from pyspark.ml.classification import RandomForestClassifier
 from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import MulticlassMetrics
-from pyspark.sql.functions import col
 
 # Create spark session
 spark = SparkSession.builder.appName("M2 - ICP 7").getOrCreate()
