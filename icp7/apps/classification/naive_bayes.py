@@ -4,13 +4,17 @@ from pyspark.ml.evaluation import MulticlassClassificationEvaluator
 from pyspark.ml.feature import VectorAssembler
 from pyspark.mllib.evaluation import MulticlassMetrics
 
-# Create spark session
-spark = SparkSession.builder.appName("Lab 4").getOrCreate()
+#from pyspark.sql import functions as F
+
+
+spark = SparkSession.builder.appName("M2 - ICP 7").getOrCreate()
 spark.sparkContext.setLogLevel("ERROR")
 
 # Load data and select feature and label columns
 data = spark.read.format("csv").option("header", True).option("inferSchema", True).option("delimiter", ",").load(
     "/home/charan/workspaces/big_data_programming/bigdata_progamming_m2_icp/icp7/apps/datasets/adult.data")
+
+# data = data.select("*", F.when(data.X == ' <=50K', 1).when(data.X == ' >50K', 2).otherwise(0).alias('label'))
 
 data = data.withColumnRenamed("age", "label").select("label", "education-num", "hours-per-week")
 
