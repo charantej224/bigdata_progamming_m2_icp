@@ -8,6 +8,8 @@ https://github.com/charantej224/bigdata_progamming_m2_icp/wiki/Module-2-:-ICP3-:
 * ICP4: Documentation and challenges regarding the ICP4, Apache Spark Streaming can be found here.
 https://github.com/charantej224/bigdata_progamming_m2_icp/wiki/Module-2-:-ICP-4-:-Apache-Spark-Streaming
 
+* ICP5: https://github.com/charantej224/bigdata_progamming_m2_icp/wiki/Module-2-:-ICP-5-:-GraphX-&-Graph-Frame
+
 * ICP6 : https://github.com/charantej224/bigdata_progamming_m2_icp/wiki/Module-2-:-ICP-6-:-GraphX-&-Graph-Frame
 
 * ICP7 : Documentation and Challenges regarding in ICP7, MLLIB are found here https://github.com/charantej224/bigdata_progamming_m2_icp/wiki/Module-2-:-ICP-7:-Machine-Learning-in-Spark
